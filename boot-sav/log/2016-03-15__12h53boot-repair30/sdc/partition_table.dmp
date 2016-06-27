@@ -1,0 +1,7 @@
+label: dos
+label-id: 0xcad4ebea
+device: /dev/sdc
+unit: sectors
+
+/dev/sdc1 : start=     2329856, size=    12801780, type=c
+/dev/sdc4 : start=         256, size=     2329600, type=16, bootable
