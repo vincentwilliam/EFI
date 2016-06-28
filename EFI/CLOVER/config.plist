@@ -10,6 +10,13 @@
 			<false/>
 			<key>DropOEM_DSM</key>
 			<false/>
+			<key>Fixes</key>
+			<dict>
+				<key>FixRegions_10000000</key>
+				<true/>
+				<key>NewWay_80000000</key>
+				<true/>
+			</dict>
 			<key>Name</key>
 			<string>DSDT.aml</string>
 			<key>ReuseFFFF</key>
@@ -18,15 +25,17 @@
 		<key>SSDT</key>
 		<dict>
 			<key>DropOem</key>
-			<false/>
+			<true/>
 			<key>Generate</key>
 			<false/>
+			<key>PluginType</key>
+			<string>1</string>
 		</dict>
 	</dict>
 	<key>Boot</key>
 	<dict>
 		<key>Arguments</key>
-		<string>dart=0 -xcpm darkwake=0 nv_disable=1 -gux_defer_usb2 kext-dev-mode =1</string>
+		<string>dart=0 -xcpm darkwake=0 nv_disable=1 -gux_defer_usb2 kext-dev-mode=1 rootless=0</string>
 		<key>Debug</key>
 		<false/>
 		<key>DefaultVolume</key>
@@ -38,10 +47,20 @@
 		<key>Timeout</key>
 		<integer>3</integer>
 		<key>XMPDetection</key>
+		<string>Yes</string>
+	</dict>
+	<key>CPU</key>
+	<dict>
+		<key>UseARTFrequency</key>
 		<false/>
 	</dict>
 	<key>Devices</key>
 	<dict>
+		<key>Audio</key>
+		<dict>
+			<key>Inject</key>
+			<string>1</string>
+		</dict>
 		<key>FakeID</key>
 		<dict>
 			<key>ATI</key>
@@ -49,7 +68,7 @@
 			<key>IMEI</key>
 			<string>0x0</string>
 			<key>IntelGFX</key>
-			<string>0x1912000</string>
+			<string>0x0</string>
 			<key>LAN</key>
 			<string>0x0</string>
 			<key>NVidia</key>
@@ -61,13 +80,19 @@
 			<key>XHCI</key>
 			<string>0x0</string>
 		</dict>
+		<key>ForceHPET</key>
+		<true/>
 		<key>USB</key>
 		<dict>
+			<key>AddClockID</key>
+			<true/>
 			<key>FixOwnership</key>
 			<true/>
 			<key>Inject</key>
-			<false/>
+			<true/>
 		</dict>
+		<key>UseIntelHDMI</key>
+		<true/>
 	</dict>
 	<key>DisableDrivers</key>
 	<array>
@@ -99,6 +124,8 @@
 			<true/>
 			<key>Legacy</key>
 			<false/>
+			<key>Linux</key>
+			<false/>
 			<key>Tool</key>
 			<true/>
 		</dict>
@@ -120,6 +147,8 @@
 		</dict>
 		<key>NvidiaSingle</key>
 		<false/>
+		<key>ig-platform-id</key>
+		<string>0x191b0000</string>
 	</dict>
 	<key>KernelAndKextPatches</key>
 	<dict>
@@ -141,35 +170,9 @@
 		<array>
 			<dict>
 				<key>Comment</key>
-				<string>External icons patch</string>
-				<key>Find</key>
-				<data>
-				RXh0ZXJuYWw=
-				</data>
-				<key>Name</key>
-				<string>AppleAHCIPort</string>
-				<key>Replace</key>
-				<data>
-				SW50ZXJuYWw=
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
-				<string>Raise USB Port Limit</string>
-				<key>Find</key>
-				<data>
-				g72M/v//EA==
-				</data>
-				<key>Name</key>
-				<string>AppleUSBXHCIPCI</string>
-				<key>Replace</key>
-				<data>
-				g72M/v//Hw==
-				</data>
-			</dict>
-			<dict>
-				<key>Comment</key>
 				<string>Skylake AppleAPIC Patch (c) Pike R. Alpha</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				wegQD7bw
@@ -183,7 +186,41 @@
 			</dict>
 			<dict>
 				<key>Comment</key>
+				<string>Raise USB Port Limit</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				g72M/v//EA==
+				</data>
+				<key>Name</key>
+				<string>AppleUSBXHCIPCI</string>
+				<key>Replace</key>
+				<data>
+				g72M/v//Hw==
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>External icons patch</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				RXh0ZXJuYWw=
+				</data>
+				<key>Name</key>
+				<string>AppleAHCIPort</string>
+				<key>Replace</key>
+				<data>
+				SW50ZXJuYWw=
+				</data>
+			</dict>
+			<dict>
+				<key>Comment</key>
 				<string>TRIM</string>
+				<key>Disabled</key>
+				<false/>
 				<key>Find</key>
 				<data>
 				QVBQTEUgU1NEAA==
@@ -195,54 +232,61 @@
 				AAAAAAAAAAAAAA==
 				</data>
 			</dict>
+			<dict>
+				<key>Comment</key>
+				<string>Boot graphics glitch, 10.10.x/10.11.x (credit lisai9093, cecekpawon)</string>
+				<key>Disabled</key>
+				<false/>
+				<key>Find</key>
+				<data>
+				AQAAdRc=
+				</data>
+				<key>Name</key>
+				<string>IOGraphicsFamily</string>
+				<key>Replace</key>
+				<data>
+				AQAA6xc=
+				</data>
+			</dict>
 		</array>
 	</dict>
 	<key>RtVariables</key>
 	<dict>
 		<key>BooterConfig</key>
-		<string>0x28</string>
+		<string>0x67</string>
 		<key>CsrActiveConfig</key>
-		<string>0x3</string>
+		<string>0x28</string>
 	</dict>
 	<key>SMBIOS</key>
 	<dict>
 		<key>BiosReleaseDate</key>
-		<string>09/22/2015</string>
+		<string>10/18/13</string>
 		<key>BiosVendor</key>
 		<string>Apple Inc.</string>
 		<key>BiosVersion</key>
-		<string>IM171.88Z.0105.B00.1509221819</string>
+		<string>MBP112.88Z.0138.B02.1310181745</string>
 		<key>Board-ID</key>
-		<string>Mac-DB15BD556843C820</string>
+		<string>Mac-3CBD00234E554E41</string>
 		<key>BoardManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>BoardType</key>
 		<integer>10</integer>
-		<key>BoardVersion</key>
-		<string>iMac17,1</string>
 		<key>ChassisAssetTag</key>
-		<string></string>
+		<string>MacBook-Aluminum</string>
 		<key>ChassisManufacturer</key>
 		<string>Apple Inc.</string>
 		<key>ChassisType</key>
-		<string>13</string>
+		<string>08</string>
 		<key>Family</key>
-		<string>iMac</string>
-		<key>LocationInChassis</key>
-		<string>Part Component</string>
+		<string>MacBook Pro</string>
 		<key>Manufacturer</key>
 		<string>Apple Inc.</string>
-		<key>Memory</key>
-		<dict>
-			<key>Channels</key>
-			<integer>2</integer>
-			<key>SlotCount</key>
-			<integer>4</integer>
-		</dict>
+		<key>Mobile</key>
+		<true/>
 		<key>ProductName</key>
-		<string>iMac17,1</string>
+		<string>MacBookPro11,2</string>
 		<key>SerialNumber</key>
-		<string>C02QXXXXGG7L</string>
+		<string>C02LV67QFD56</string>
 		<key>Trust</key>
 		<false/>
 		<key>Version</key>
