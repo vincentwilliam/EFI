@@ -49,7 +49,7 @@
 			<key>IMEI</key>
 			<string>0x0</string>
 			<key>IntelGFX</key>
-			<string>0x1912000</string>
+			<string>0x19120000</string>
 			<key>LAN</key>
 			<string>0x0</string>
 			<key>NVidia</key>
