@@ -227,7 +227,7 @@
 		<key>ChassisType</key>
 		<string>13</string>
 		<key>Family</key>
-		<string>iMac</string>
+		<string>MBP</string>
 		<key>LocationInChassis</key>
 		<string>Part Component</string>
 		<key>Manufacturer</key>
@@ -240,7 +240,7 @@
 			<integer>4</integer>
 		</dict>
 		<key>ProductName</key>
-		<string>iMac17,1</string>
+		<string>MacBook Pro,1</string>
 		<key>SerialNumber</key>
 		<string>C02QXXXXGG7L</string>
 		<key>Trust</key>
