@@ -1,9 +1,0 @@
-label: gpt
-label-id: CF5E1C68-ADCD-4758-84C5-1D328371208D
-device: /dev/sdb
-unit: sectors
-first-lba: 34
-last-lba: 1953525134
-
-/dev/sdb1 : start=        4096, size=      258048, type=E3C9E316-0B5C-4DB8-817D-F92DF00215AE, uuid=34BF9A9C-FB71-4BD8-8003-446418C6064F, name="Microsoft reserved partition"
-/dev/sdb2 : start=      262144, size=  1953259520, type=EBD0A0A2-B9E5-4433-87C0-68B6B72699C7, uuid=25CE82C0-1079-4853-984C-9E7D1C06539E, name="Basic data partition"
